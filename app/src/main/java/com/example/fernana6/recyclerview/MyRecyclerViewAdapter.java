@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import me.rishabhkhanna.recyclerswipedrag.RecyclerHelper;
+
 /**
  * Created by FernanA6 on 12-Apr-18.
  */
@@ -17,7 +19,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     private List<Persona> mData;
     private LayoutInflater mInflater;
-    private ItemClickListener mClickListener;
+    //private ItemClickListener mClickListener;
 
     // data is passed into the constructor
     MyRecyclerViewAdapter(Context context, List<Persona> data) {
@@ -52,7 +54,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
 
     // stores and recycles views as they are scrolled off screen
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvName;
         TextView tvSurname;
         TextView tvEmail;
@@ -62,13 +64,15 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             tvName = itemView.findViewById(R.id.tvName);
             tvSurname = itemView.findViewById(R.id.tvSurname);
             tvEmail = itemView.findViewById(R.id.tvEmail);
-            itemView.setOnClickListener(this);
+            //itemView.setOnClickListener(this);
         }
 
-        @Override
+
+
+        /*@Override
         public void onClick(View view) {
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
-        }
+        }*/
     }
 
     // convenience method for getting data at click position
@@ -76,7 +80,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         return mData.get(id).toString();
     }
 
-    // allows clicks events to be caught
+    /*// allows clicks events to be caught
     void setClickListener(ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
@@ -84,5 +88,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
         void onItemClick(View view, int position);
-    }
+    }*/
+
 }
