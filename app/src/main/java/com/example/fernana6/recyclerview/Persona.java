@@ -5,7 +5,7 @@ package com.example.fernana6.recyclerview;
  */
 
 public class Persona {
-    String name, surname, email;
+    private String name, surname, email;
 
     public Persona(String name, String surname, String email){
         this.name = name;
