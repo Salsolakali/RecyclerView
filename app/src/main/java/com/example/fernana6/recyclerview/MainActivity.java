@@ -1,5 +1,6 @@
 package com.example.fernana6.recyclerview;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import me.rishabhkhanna.recyclerswipedrag.OnDragListener;
 import me.rishabhkhanna.recyclerswipedrag.OnSwipeListener;
@@ -16,7 +18,7 @@ import java.util.ArrayList;
 
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener{
 
     MyRecyclerViewAdapter adapter;
     public static final String TAG = "MainActivity";
@@ -31,9 +33,9 @@ public class MainActivity extends AppCompatActivity {
         personas.add(new Persona("Alberto", "Fernandez", "sucorreo"));
         personas.add(new Persona("Alberto", "Fernandez", "sucorreo"));
         personas.add(new Persona("Alberto", "Fernandez", "sucorreo"));
+        personas.add(new Persona("Miguel", "Fernandez", "sucorreo"));
         personas.add(new Persona("Alberto", "Fernandez", "sucorreo"));
-        personas.add(new Persona("Alberto", "Fernandez", "sucorreo"));
-        personas.add(new Persona("Alberto", "Fernandez", "sucorreo"));
+        personas.add(new Persona("Patri", "Fernandez", "sucorreo"));
         personas.add(new Persona("Alberto", "Fernandez", "sucorreo"));
         personas.add(new Persona("Alberto", "Fernandez", "sucorreo"));
         personas.add(new Persona("DAvid", "Fernandez", "sucorreo"));
@@ -42,14 +44,14 @@ public class MainActivity extends AppCompatActivity {
         personas.add(new Persona("Fer", "Fernandez", "sucorreo"));
         personas.add(new Persona("Miguel", "Fernandez", "sucorreo"));
         personas.add(new Persona("Otro david", "Fernandez", "sucorreo"));
-        personas.add(new Persona("Señor Tumnus", "Fernandez", "sucorreo"));
+        personas.add(new Persona("Señor Tumnusssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", "Tumnusssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", "Tumnusssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"));
         personas.add(new Persona("Cristobal Colon", "Fernandez", "sucorreo"));
 
         // set up the RecyclerView
         final RecyclerView recyclerView = findViewById(R.id.rvPersonas);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MyRecyclerViewAdapter(this, personas);
-        //adapter.setClickListener(this);
+        adapter.setClickListener(this);
 
         recyclerView.setAdapter(adapter);
 
@@ -73,9 +75,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /*@Override
+    @Override
     public void onItemClick(View view, int position) {
-        //Toast.makeText(this, "You clicked " +  adapter.getItem(position).toString() + " on row number " + position, Toast.LENGTH_SHORT).show();
-    }*/
+        //Toast.makeText(this, "You clicked " +  adapter.getItem(position).getName() + " on row number " + position, Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(this,DetallesPersonaActivity.class);
+        intent.putExtra("name",adapter.getItem(position).getName());
+        intent.putExtra("surname",adapter.getItem(position).getSurname());
+        intent.putExtra("email",adapter.getItem(position).getEmail());
+        startActivity(intent);
+    }
 
 }

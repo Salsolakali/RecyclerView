@@ -3,6 +3,7 @@ package com.example.fernana6.recyclerview;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -19,7 +20,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     private List<Persona> mData;
     private LayoutInflater mInflater;
-    //private ItemClickListener mClickListener;
+    private ItemClickListener mClickListener;
 
     // data is passed into the constructor
     MyRecyclerViewAdapter(Context context, List<Persona> data) {
@@ -38,15 +39,14 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        Persona name = mData.get(position);
+        Persona persona = mData.get(position);
 
-        holder.tvName.setText(name.getName());
-        holder.tvSurname.setText(name.getSurname());
-        holder.tvEmail.setText(name.getEmail());
+        holder.tvName.setText(persona.getName());
+        holder.tvSurname.setText(persona.getSurname());
+        holder.tvEmail.setText(persona.getEmail());
 
     }
 
-    // total number of rows
     @Override
     public int getItemCount() {
         return mData.size();
@@ -54,7 +54,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
 
     // stores and recycles views as they are scrolled off screen
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView tvName;
         TextView tvSurname;
         TextView tvEmail;
@@ -64,23 +64,22 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             tvName = itemView.findViewById(R.id.tvName);
             tvSurname = itemView.findViewById(R.id.tvSurname);
             tvEmail = itemView.findViewById(R.id.tvEmail);
-            //itemView.setOnClickListener(this);
+            itemView.setOnClickListener(this);
         }
 
 
-
-        /*@Override
+        @Override
         public void onClick(View view) {
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
-        }*/
+        }
     }
 
     // convenience method for getting data at click position
-    String getItem(int id) {
-        return mData.get(id).toString();
+    Persona getItem(int position) {
+        return mData.get(position);
     }
 
-    /*// allows clicks events to be caught
+    // allows clicks events to be caught
     void setClickListener(ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
@@ -88,6 +87,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
         void onItemClick(View view, int position);
-    }*/
+    }
 
 }
